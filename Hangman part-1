@@ -1,0 +1,110 @@
+#this is just a simple code for hangman with no GUI added !
+from words import words
+import random
+from words import words
+import string
+
+name=input("Enter your name -->").upper()
+print(f"huh!!{name} is your name,i dont like it")
+print("----------------------------")
+print("WELCOME TO THE GATE OF DEATH!! LET'S PLAY HANGMAN")
+print("----------------------------")
+print("You have only 10 attempts!! Guess the correct word before I take your Life")
+
+def choose_word(words):
+    word=random.choice(words)
+    while " " in word or "-" in word:
+        word = random.choice(words)
+    return word.upper()
+
+def hangman(words):
+    word=choose_word(words)
+    valid_entry=set(string.ascii_uppercase)
+    turns=10
+    player_word=""
+
+    while len(word)>0:
+
+        main_word=''
+        for letter in word:
+
+            if letter in player_word:
+                main_word=main_word+letter  #here see again and again till you get it
+            else:
+                main_word=main_word+"_ "
+
+        if main_word==word:
+            print(main_word)
+            print("YOU WON!!")
+            break
+
+        print("ENTER A SINGLE CHARACTER-->",main_word)
+        guess=input().upper()
+
+        if guess in valid_entry:
+            player_word=player_word+guess
+        else:
+            print("PLS!! ENTER THE CORRECT GUESS")
+            guess = input("ENTER A SINGLE CHARACTER-->").upper()
+
+        if guess not in word:
+            turns=turns-1
+
+        if turns==9:
+            print("Now You Have 9 Turns left")
+            print("------------------")
+        if turns==8:
+            print("Now You Have 8 Turns left")
+            print("------------------")
+            print("        O         ")
+        if turns==7:
+            print("Now You Have 7 Turns left")
+            print("------------------")
+            print("        O         ")
+            print("        |         ")
+        if turns==6:
+            print("Now You Have 6 Turns left")
+            print("------------------")
+            print("        O         ")
+            print("        |         ")
+            print("       /          ")
+        if turns==5:
+            print("Now You Have 5 Turns left")
+            print("------------------")
+            print("        O         ")
+            print("        |         ")
+            print("       / \        ")
+        if turns==4:
+            print("Now You Have 4 Turns left")
+            print("------------------")
+            print("       \O         ")
+            print("        |         ")
+            print("       / \        ")
+        if turns==3:
+            print("Now You Have 3 Turns left")
+            print("------------------")
+            print("       \O/        ")
+            print("        |         ")
+            print("       / \        ")
+        if turns==2:
+            print("Now You Have 2 Turns left")
+            print("------------------")
+            print("       \O/_       ")
+            print("        |         ")
+            print("       / \        ")
+        if turns==1:
+            print("Now You Have only 1 Turns left!!! you are about to DIE")
+            print("------------------")
+            print("       \O/_|      ")
+            print("        |         ")
+            print("       / \        ")
+        if turns==0:
+            print("YOU LOOSE!!! YOU ARE DEAD!!")
+            print("------------------")
+            print("        X_|       ")
+            print("       /|\        ")
+            print("       / \        ")
+            print("YOU MUST REMEMBER THIS WORD!! WHO GOT YOU KILLED!!",word)
+            break
+
+hangman(words)
